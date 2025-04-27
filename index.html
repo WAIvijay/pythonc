@@ -10,6 +10,7 @@
             margin: 0;
             padding: 0;
             background-color: #f4f4f9;
+            display: none; /* Initially hide the content */
         }
         header {
             background-color: #333;
@@ -50,8 +51,7 @@
         }
     </style>
 </head>
-<body>
-
+<body onload="askPassword()">
 <header>
     <h3>Code Sharing Platform</h3>
 </header>
@@ -594,6 +594,17 @@ print("the time complexity is:", end - start)
         </pre>
       </div>
 </div>
+<script>
+    function askPassword() {
+        var password = prompt("Enter password to access the platform:");
+        if (password === "admin") {  // Change 'admin' to your desired password
+            document.body.style.display = "block";  // Show the content if correct password
+        } else {
+            alert("Incorrect password. Access denied!");  // Show alert on wrong password
+            window.location.href = "about:blank";  // Redirect to blank page if incorrect
+        }
+    }
+</script>
 
 </body>
 </html>
