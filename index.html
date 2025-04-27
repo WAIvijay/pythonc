@@ -73,6 +73,7 @@
         <a href="#bfs">BFS (Breadth First Search)</a>
         <a href="#stack">Stack Implementation</a>
         <a href="#hashing">Hashing</a>
+        <a href="#priority-queue">priority queue</a>
     </div>
 
     <!-- Linear Search -->
@@ -498,7 +499,22 @@ while (ans == "yes"):
     ans = input("do u want to continue (yes/no)")
         </pre>
     </div>
-
+     <div id="priority queue" class="code-section">
+        <h5>priority queue</h5>
+        <pre>
+    import heapq
+queue = []
+heapq.heappush(queue, (6, 'A'))
+heapq.heappush(queue, (5, 'B'))
+heapq.heappush(queue, (2, 'C'))
+print(queue)
+element = heapq.heappop(queue)
+print("Deleted queue is:", element)
+while queue:
+    element = heapq.heappop(queue)
+    print(element)
+        </pre>
+     </div>
 </div>
 
 </body>
