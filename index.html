@@ -551,6 +551,48 @@ end = time.time()
 print("the time is", end - start) 
         </pre>
      </div>
+    <div id=" " class="code-section">
+        <h5>cd-linked_list</h5>
+        <pre>
+import time
+start = time.time()
+import collections
+cd_linked_list = collections.deque()
+cd_linked_list.append('20')
+print(cd_linked_list)
+cd_linked_list.append('40')
+print(cd_linked_list)
+cd_linked_list.insert(2, '10')
+print(cd_linked_list)
+cd_linked_list.insert(1, '80')
+print(cd_linked_list)
+cd_linked_list.remove('10')
+print(cd_linked_list)
+end = time.time()
+print("time complexity=", end - start)
+        </pre>
+     </div>
+      <div id=" " class="code-section">
+        <h5>double-linked_list</h5>
+        <pre>
+import time
+start = time.time()
+import collections
+double_linked_list = collections.deque()
+double_linked_list.append('20')
+print(double_linked_list)
+double_linked_list.append('30')
+print(double_linked_list)
+double_linked_list.insert(0, '10')
+print(double_linked_list)
+double_linked_list.insert(2, '50')
+print(double_linked_list)
+double_linked_list.remove('50')
+print(double_linked_list)
+end = time.time()
+print("the time complexity is:", end - start)
+        </pre>
+      </div>
 </div>
 
 </body>
