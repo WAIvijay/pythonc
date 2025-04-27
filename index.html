@@ -74,6 +74,7 @@
         <a href="#stack">Stack Implementation</a>
         <a href="#hashing">Hashing</a>
         <a href="#priority-queue">priority queue</a>
+        <a href="#queue">queue</a>
     </div>
 
     <!-- Linear Search -->
@@ -499,10 +500,10 @@ while (ans == "yes"):
     ans = input("do u want to continue (yes/no)")
         </pre>
     </div>
-     <div id="priority queue" class="code-section">
+     <div id="priority-queue" class="code-section">
         <h5>priority queue</h5>
         <pre>
-    import heapq
+import heapq
 queue = []
 heapq.heappush(queue, (6, 'A'))
 heapq.heappush(queue, (5, 'B'))
@@ -513,6 +514,41 @@ print("Deleted queue is:", element)
 while queue:
     element = heapq.heappop(queue)
     print(element)
+        </pre>
+     </div>
+    <div id="queue" class="code-section">
+        <h5>queue</h5>
+        <pre>
+import time
+start = time.time()
+queue = []
+def enqueue():
+    e = input("Enter the element")
+    queue.append(e)
+    print(e, "is added to queue")
+def dequeue():
+    if not queue:
+        print("queue is empty")
+    else:
+        e = queue.pop(0)
+        print("removed element:", e)
+def display():
+    print(queue)
+while True:
+    print("selection the operation 1.add 2.remove 3.show 4.quit")
+    choice = int(input())
+    if choice == 1:
+        enqueue()
+    elif choice == 2:
+        dequeue()
+    elif choice == 3:
+        display()
+    elif choice == 4:
+        break
+    else:
+        print("Invalid choice. Please select a valid operation.")
+end = time.time()
+print("the time is", end - start) 
         </pre>
      </div>
 </div>
