@@ -2,609 +2,216 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Code Sharing Platform</title>
+    <title>C Programming Examples</title>
     <style>
         body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-            background-color: #f4f4f9;
-            display: none; /* Initially hide the content */
+            background-color: #1e1e1e;
+            color: #ffffff;
+            font-family: Consolas, monospace;
+            padding: 20px;
         }
-        header {
-            background-color: #333;
-            color: white;
-            padding: 10px 0;
-            text-align: center;
-        }
-        .container {
-            width: 80%;
-            margin: 20px auto;
-        }
-        .code-section {
-            background-color: #fff;
-            padding: 15px;
-            border-radius: 5px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            margin-bottom: 30px;
+        h1, h2 {
+            color: #00ffc8;
         }
         pre {
-            background-color: #f4f4f4;
-            padding: 10px;
-            border-radius: 5px;
-            font-size: 1.1em;
+            background-color: #2d2d2d;
+            padding: 15px;
+            border-radius: 10px;
             overflow-x: auto;
+            border: 1px solid #444;
+            box-shadow: 0 0 10px #00ffc84d;
         }
-        .nav-menu {
-            margin: 15px 0;
-            text-align: center;
-        }
-        .nav-menu a {
-            margin: 0 15px;
-            color: #333;
-            text-decoration: none;
-            font-weight: bold;
-        }
-        .nav-menu a:hover {
-            color: #007bff;
+        code {
+            color: #ffffff;
         }
     </style>
 </head>
-<body onload="askPassword()">
-<header>
-    <h3>Code Sharing Platform</h3>
-</header>
+<body>
 
-<div class="container">
-    <div class="nav-menu">
-        <a href="#linear-search">Linear Search</a>
-        <a href="#binary-search">Binary Search</a>
-        <a href="#bubble-sort">Bubble Sort</a>
-        <a href="#insertion-sort">Insertion Sort</a>
-        <a href="#selection-sort">Selection Sort</a>
-        <a href="#merge-sort">Merge Sort</a>
-        <a href="#quick-sort">Quick Sort</a>
-        <a href="#fibonacci">Fibonacci Series</a>
-        <a href="#factorial">Factorial Program</a>
-        <a href="#tower-of-hanoi">Tower of Hanoi</a>
-        <a href="#bracket-balance">Bracket Balance</a>
-        <a href="#dfs">DFS (Depth First Search)</a>
-        <a href="#bfs">BFS (Breadth First Search)</a>
-        <a href="#stack">Stack Implementation</a>
-        <a href="#hashing">Hashing</a>
-        <a href="#priority-queue">priority queue</a>
-        <a href="#queue">queue</a>
-    </div>
+    <h1>C Programming Examples</h1>
 
-    <!-- Linear Search -->
-    <div id="linear-search" class="code-section">
-        <h5>Linear Search</h5>
-        <pre>
-import time
-start = time.time()
-def linear_search(list1, n, key):
-    for i in range(0, n):
-        if(list1[i] == key):
-            return i
-    return -1
-list1 = [1, 4, 7, 10, 10, 23, 100]
-print("list1", list1)
-key = int(input("Enter the number: "))
-n = len(list1)
-res = linear_search(list1, n, key)
-if res == -1:
-    print("Element not found")
-else:
-    print("Element found at index", "[", res, "]", "sorted list")
-end = time.time()
-print("The time complexity of the program is:", end - start)
-        </pre>
-    </div>
+    <h2>1. Fork Example</h2>
+    <pre><code>#include &lt;stdio.h&gt;
+#include &lt;sys/types.h&gt;
+#include &lt;unistd.h&gt;
 
-    <!-- Binary Search -->
-    <div id="binary-search" class="code-section">
-        <h5>Binary Search</h5>
-        <pre>
-import time
-start = time.time()
-def binary(list1, low, high, key):
-    mid = (high + low) // 2
-    if high < low:
-        return -1
-    if list1[mid] < key:
-        return binary(list1, mid + 1, high, key)
-    elif list1[mid] > key:
-        return binary(list1, low, mid - 1, key)
-    else:
-        return mid
-list1 = [4, 8, 10, 15, 17, 19, 20]
-high = len(list1) - 1
-low = 0
-print(list1)
-key = int(input("Enter any number: "))
-res = binary(list1, low, high, key)
-if res != -1:
-    print("Element is present at index", "[", res, "]")
-else:
-    print("Element not found")
-end = time.time()
-print("Time complexity", end - start)
-        </pre>
-    </div>
-
-    <!-- Bubble Sort -->
-    <div id="bubble-sort" class="code-section">
-        <h5>Bubble Sort</h5>
-        <pre>
-import time
-start = time.time()
-def bubble(arr):
-    n = len(arr)
-    for i in range(n):
-        for j in range(0, n - i - 1):
-            if arr[j] > arr[j + 1]:
-                arr[j], arr[j + 1] = arr[j + 1], arr[j]
-arr = [1, 44, 2, 8, 5, 3, 4]
-bubble(arr)
-print("Sorted array is:")
-for i in range(len(arr)):
-    print("%d" % arr[i], end=" ")
-end = time.time()
-print("\nThe complexity of the program is", end - start)
-        </pre>
-    </div>
-
-    <!-- Insertion Sort -->
-    <div id="insertion-sort" class="code-section">
-        <h5>Insertion Sort</h5>
-        <pre>
-import time
-start = time.time()
-def insertion_sort(arr):
-    n = len(arr)
-    for i in range(1, n):
-        key = arr[i]
-        j = i - 1
-        arr[j + 1] = key
-        print(arr)
-arr = [1, 6, 7, 4, 3]
-insertion_sort(arr)
-
-end = time.time()
-print("The time complexity of the program is:", end - start)
-        </pre>
-    </div>
-
-    <!-- Selection Sort -->
-    <div id="selection-sort" class="code-section">
-        <h5>Selection Sort</h5>
-        <pre>
-import time
-start = time.time()
-
-def selection(arr):
-    n = len(arr)
-    for i in range(n - 1):
-        small = i
-        for j in range(i, n):
-            if(arr[j] < arr[small]):
-                small = j
-        arr[i], arr[small] = arr[small], arr[i]
-        print(arr)
-
-arr = [5, 3, 8, 6, 7, 2, 9]
-selection(arr)
-
-end = time.time()
-print("The time complexity of the program is:", end - start)
-        </pre>
-    </div>
-
-    <!-- Merge Sort -->
-    <div id="merge-sort" class="code-section">
-        <h5>Merge Sort</h5>
-        <pre>
-import time
-start = time.time()
-
-def mergesort(list1):
-    if len(list1) > 1:
-        mid = len(list1) // 2
-        left = list1[:mid]
-        right = list1[mid:]
-        mergesort(left)
-        mergesort(right)
-        i = j = k = 0
-        while i < len(left) and j < len(right):
-            if left[i] < right[j]:
-                list1[k] = left[i]
-                i = i + 1
-                k = k + 1
-            else:
-                list1[k] = right[j]
-                j = j + 1
-                k = k + 1
-        while i < len(left):
-            list1[k] = left[i]
-            i = i + 1
-            k = k + 1
-        while j < len(right):
-            list1[k] = right[j]
-            j = j + 1
-            k = k + 1
-
-list1 = [39, 64, 26, 51, 96, 45, 64, 73]
-print("Before sorting:", list1)
-mergesort(list1)
-print("After sorting:", list1)
-
-end = time.time()
-print("Time complexity of the program is", end - start)
-        </pre>
-    </div>
-
-    <!-- Quick Sort -->
-    <div id="quick-sort" class="code-section">
-        <h5>Quick Sort</h5>
-        <pre>
-import time
-start = time.time()
-
-def partition(left, right, nums):
-    pivot, ptr = nums[right], left
-    for i in range(left, right):
-        if nums[i] <= pivot:
-            nums[i], nums[ptr] = nums[ptr], nums[i]
-            ptr += 1
-    nums[ptr], nums[right] = nums[right], nums[ptr]
-    return ptr
-
-def quicksort(left, right, nums):
-    if len(nums) == 1:
-        return nums
-    if left < right:
-        pi = partition(left, right, nums)
-        quicksort(left, pi - 1, nums)
-    return nums
-
-list1 = [30, 50, 90, 10, 80, 40, 70]
-print("Unsorted:", list1)
-quicksort(0, len(list1) - 1, list1)
-print("Sorted:", list1)
-
-end = time.time()
-print("Time complexity of the program is", end - start)
-        </pre>
-    </div>
-
-    <!-- Fibonacci Series -->
-    <div id="fibonacci" class="code-section">
-        <h5>Fibonacci Series</h5>
-        <pre>
-import time
-start = time.time()
-
-num = int(input("Enter any number: "))
-n1, n2 = 0, 1
-sum = 0
-if num <= 0:
-    print("Please enter a number greater than 0.")
-else:
-    for i in range(0, num):
-        print(sum, end=" ")
-        n1 = n2
-        n2 = sum
-        sum = n1 + n2
-
-end = time.time()
-print("\nThe time complexity of the program is", end - start)
-        </pre>
-    </div>
-
-    <!-- Factorial Program -->
-    <div id="factorial" class="code-section">
-        <h5>Factorial Program</h5>
-        <pre>
-import time
-start = time.time()
-
-def fact(n):
-    if n == 1:
-        return 1
-    else:
-        return n * fact(n - 1)
-
-print("Factorial:", fact(4))
-end = time.time()
-print("The time complexity of the program is", end - start)
-        </pre>
-    </div>
-    <!-- Tower of Hanoi -->
-    <div id="tower-of-hanoi" class="code-section">
-        <h5>Tower of Hanoi</h5>
-        <pre>
-import time
-start = time.time()
-def towerofhanio(n, source, destination, auxiliary):
-    if n == 1:
-        print("Move disk 1 from source", source, "to destination", destination)
-        return
-    towerofhanio(n - 1, source, auxiliary, destination)
-    print("Move disk", n, "from source", source, "to destination", destination)
-    towerofhanio(n - 1, auxiliary, destination, source)
-n = 3
-towerofhanio(n, "1", "2", "3")
-end = time.time()
-print("Time complexity of the program is", end - start)
-        </pre>
-    </div>
-
-    <!-- Bracket Balance -->
-    <div id="bracket-balance" class="code-section">
-        <h5>Bracket Balance</h5>
-        <pre>
-import time
-start = time.time()
-def check_balance(stack):
-    count = 0
-    ans = False
-    for i in stack:
-        if i == "(" or i == "{" or i == "[":
-            count += 1
-        elif i == ")" or i == "}" or i == "]":
-            count -= 1
-        if count < 0:
-            return ans
-        if count == 0:
-            return not ans
-    return ans
-stack = input("Enter a string of brackets: ")
-print("Given string is balanced:", check_balance(stack))
-end = time.time()
-print("The time complexity of the program is", end - start)
-        </pre>
-    </div>
-
-    <!-- DFS (Depth First Search) -->
-    <div id="dfs" class="code-section">
-        <h5>DFS (Depth First Search)</h5>
-        <pre>
-import time
-start = time.time()
-graph = {
-    '70': ['50', '90'],
-    '50': ['30', '60'],
-    '90': ['80', '100'],
-    '30': ['20', '40'],
-    '60': [],
-    '80': [],
-    '100': [],
-    '20': [],
-    '40': []
+int main()
+{
+    fork();
+    printf("Using fork() system call\n");
+    return 0;
 }
-visited = set()
-def dfs(visited, graph, node):
-    if node not in visited:
-        print(node)
-        visited.add(node)
-        for neighbour in graph[node]:
-            dfs(visited, graph, neighbour)
-print("Following is the depth-first search:")
-dfs(visited, graph, '70')
-end = time.time()
-print("The time complexity of the program is:", end - start)
-        </pre>
-    </div>
+</code></pre>
 
-    <!-- Hashing -->
-    <div id="hashing" class="code-section">
-        <h5>Hashing</h5>
-        <pre>
-import time
-start = time.time()
-def display_hash(hashtable):
-    for i in range(len(hashtable)):
-        print(i, end=" ")
-        for j in hashtable[i]:
-            print("-->", end=" ")
-            print(j, end=" ")
-        print()
-hashtable = [[] for _ in range(10)]
-def hashing(keyvalue):
-    return keyvalue % len(hashtable)
-def insert(hashtable, keyvalue, value):
-    hash_key = hashing(keyvalue)
-    hashtable[hash_key].append(value)
-insert(hashtable, 1, 'Bangalore')
-insert(hashtable, 2, 'Mumbai')
-insert(hashtable, 3, 'Gujarat')
-insert(hashtable, 4, 'Goa')
-insert(hashtable, 5, 'Kerala')
-insert(hashtable, 6, 'Jammu')
-display_hash(hashtable)
-end = time.time()
-print("The time complexity of the program is:", end - start)
-        </pre>
-    </div>
- <div id="bfs" class="code-section">
-        <h5>BFS (Breadth First Search)</h5>
-        <pre>
-graph = {
-    '70': ['50', '90'],
-    '50': ['30', '60'],
-    '90': ['80', '100'],
-    '30': ['20', '40'],
-    '60': [],
-    '80': [],
-    '100': [],
-    '20': [],
-    '40': []
+    <h2>2. Exec Example</h2>
+    <pre><code>#include &lt;stdio.h&gt;
+#include &lt;string.h&gt;
+#include &lt;stdlib.h&gt;
+#include &lt;unistd.h&gt;
+#include &lt;errno.h&gt;
+
+int main()
+{
+    printf("I am the parent process\n");
+
+    char *arg_Ptr[4];
+    arg_Ptr[0] = "child.c";
+    arg_Ptr[1] = " Hello from ";
+    arg_Ptr[2] = " process 2 ";
+    arg_Ptr[3] = NULL;
+
+    execv("/home/linuxhint/Documents/child.bin", arg_Ptr);
+
+    return 0;
 }
-visited = []
-queue = []
-def bfs(visited, graph, node):
-    visited.append(node)
-    queue.append(node)
-    while queue:
-        m = queue.pop(0)
-        print(m, end=" ")
-        for neighbour in graph[m]:
-            if neighbour not in visited:
-                visited.append(neighbour)
-                queue.append(neighbour)
-print("Following is the breadth-first search")
-bfs(visited, graph, '70')
-        </pre>
-    </div>
-<!-- Stack Implementation -->
-    <div id="stack" class="code-section">
-        <h5>Stack Implementation</h5>
-        <pre>
-import time
-start = time.time()
-size = 3
-n = 1
-s = []
-ans = "yes"
-while (ans == "yes"):
-    print("1. push")
-    print("2. pop")
-    print("3. DISPLAY")
-    choice = int(input("enter your choice"))
-    if (choice == 1):
-        if (n > size):
-            print("Stack overflow")
-        else:
-            a = input("enter any number")
-            s.append(a)
-            n += 1
-    elif (choice == 2):
-        if (s == []):
-            print("stack underflow")
-        else:
-            print("deleted element is", s.pop())
-            n -= 1
-    elif (choice == 3):
-        if (s == []):
-            print("stack is empty")
-        else:
-            print("the content of the stack is ")
-            n = len(s)
-            for i in range(n - 1, -1, -1):
-                print(s[i])
-            end = time.time()
-            print("time complexity =", end - start)
-    else:
-        print("wrong input")
-    ans = input("do u want to continue (yes/no)")
-        </pre>
-    </div>
-     <div id="priority-queue" class="code-section">
-        <h5>priority queue</h5>
-        <pre>
-import heapq
-queue = []
-heapq.heappush(queue, (6, 'A'))
-heapq.heappush(queue, (5, 'B'))
-heapq.heappush(queue, (2, 'C'))
-print(queue)
-element = heapq.heappop(queue)
-print("Deleted queue is:", element)
-while queue:
-    element = heapq.heappop(queue)
-    print(element)
-        </pre>
-     </div>
-    <div id="queue" class="code-section">
-        <h5>queue</h5>
-        <pre>
-import time
-start = time.time()
-queue = []
-def enqueue():
-    e = input("Enter the element")
-    queue.append(e)
-    print(e, "is added to queue")
-def dequeue():
-    if not queue:
-        print("queue is empty")
-    else:
-        e = queue.pop(0)
-        print("removed element:", e)
-def display():
-    print(queue)
-while True:
-    print("selection the operation 1.add 2.remove 3.show 4.quit")
-    choice = int(input())
-    if choice == 1:
-        enqueue()
-    elif choice == 2:
-        dequeue()
-    elif choice == 3:
-        display()
-    elif choice == 4:
-        break
-    else:
-        print("Invalid choice. Please select a valid operation.")
-end = time.time()
-print("the time is", end - start) 
-        </pre>
-     </div>
-    <div id=" " class="code-section">
-        <h5>cd-linked_list</h5>
-        <pre>
-import time
-start = time.time()
-import collections
-cd_linked_list = collections.deque()
-cd_linked_list.append('20')
-print(cd_linked_list)
-cd_linked_list.append('40')
-print(cd_linked_list)
-cd_linked_list.insert(2, '10')
-print(cd_linked_list)
-cd_linked_list.insert(1, '80')
-print(cd_linked_list)
-cd_linked_list.remove('10')
-print(cd_linked_list)
-end = time.time()
-print("time complexity=", end - start)
-        </pre>
-     </div>
-      <div id=" " class="code-section">
-        <h5>double-linked_list</h5>
-        <pre>
-import time
-start = time.time()
-import collections
-double_linked_list = collections.deque()
-double_linked_list.append('20')
-print(double_linked_list)
-double_linked_list.append('30')
-print(double_linked_list)
-double_linked_list.insert(0, '10')
-print(double_linked_list)
-double_linked_list.insert(2, '50')
-print(double_linked_list)
-double_linked_list.remove('50')
-print(double_linked_list)
-end = time.time()
-print("the time complexity is:", end - start)
-        </pre>
-      </div>
-</div>
-<script>
-    function askPassword() {
-        var password = prompt("Enter password to access the platform:");
-        if (password === "admin") {  // Change 'admin' to your desired password
-            document.body.style.display = "block";  // Show the content if correct password
-        } else {
-            alert("Incorrect password. Access denied!");  // Show alert on wrong password
-            window.location.href = "about:blank";  // Redirect to blank page if incorrect
-        }
+</code></pre>
+
+    <h2>3. Thread Example 1</h2>
+    <pre><code>#include &lt;pthread.h&gt;
+#include &lt;stdio.h&gt;
+
+/* Thread function definition */
+void* threadFunction(void* args)
+{
+    while(1)
+    {
+        printf("I am thread function.\n");
     }
-</script>
+}
+
+int main()
+{
+    /* Creating thread id */
+    pthread_t id;
+    int ret;
+
+    /* Creating thread */
+    ret = pthread_create(&id, NULL, &threadFunction, NULL);
+
+    if(ret == 0){
+        printf("Thread created successfully.\n");
+    }
+    else{
+        printf("Thread not created.\n");
+        return 0; /* return from main */
+    }
+
+    while(1)
+    {
+        printf("I am main function.\n");
+    }
+
+    return 0;
+}
+</code></pre>
+
+    <h2>4. Thread Example 2 with Mutex</h2>
+    <pre><code>#include &lt;stdio.h&gt;
+#include &lt;pthread.h&gt;
+
+#define NTHREADS 10
+void *thread_function(void *);
+pthread_mutex_t mutex1 = PTHREAD_MUTEX_INITIALIZER;
+int counter = 0;
+
+int main()
+{
+    pthread_t thread_id[NTHREADS];
+    int i, j;
+
+    for(i = 0; i &lt; NTHREADS; i++)
+    {
+        pthread_create(&thread_id[i], NULL, thread_function, NULL);
+    }
+
+    for(j = 0; j &lt; NTHREADS; j++)
+    {
+        pthread_join(thread_id[j], NULL);
+    }
+
+    printf("Final counter value: %d\n", counter);
+    return 0;
+}
+
+void *thread_function(void *dummyPtr)
+{
+    printf("Thread number %ld\n", pthread_self());
+
+    pthread_mutex_lock(&mutex1);
+    counter++;
+    pthread_mutex_unlock(&mutex1);
+
+    return NULL;
+}
+</code></pre>
+<h2>5. Bash Script Example</h2>
+<pre><code>#!/bin/bash
+echo "Please enter your name: "
+read name
+if [ -z "$name" ]; then
+    echo "You didn't enter anything."
+    exit 1
+fi
+if [[ ! "$name" =~ ^[a-zA-Z]+$ ]]; then
+    echo "Invalid name. Please enter only alphabetic characters."
+    exit 1
+fi
+uppercase_name=$(echo "$name" | tr '[:lower:]' '[:upper:]')
+
+echo "Original Name: $name"
+echo "Uppercase Name: $uppercase_name"
+if [[ "$name" == [Aa]* ]]; then
+    echo "Your name starts with the letter 'A' or 'a'."
+else
+    echo "Your name does not start with the letter 'A' or 'a'."
+fi
+</code></pre>
+<h2>6. Bash Script Example (Iterations and File Operations)</h2>
+<pre><code>#!/bin/bash
+echo "Numbers from 1 to 5:"
+for i in {1..5}; do
+echo $i
+done
+count=1
+echo "Numbers from 1 to 5 using while loop:"
+while [ $count -le 5 ]; do
+echo $count
+((count++))
+done
+echo "Creating a file 'example.txt'..."
+echo "Hello, this is a sample file." > example.txt
+echo "Reading content from 'example.txt'..."
+cat example.txt
+echo "Appending more content to 'example.txt'..."
+echo "This is additional text." >> example.txt
+echo "Updated content of 'example.txt':"
+cat example.txt
+echo "Deleting 'example.txt'..."
+rm example.txt
+</code></pre>
+<h2>7. Bash Script Example (Memory Monitoring)</h2>
+<pre><code>#!/bin/bash
+while true; do
+memory_usage=$(free -m | awk 'NR==2{printf "%.2f%%\n", $3*100/$2}')
+echo "Memory Usage: $memory_usage"
+sleep 10
+done
+</code></pre>
+<h2>8. Bash Script Example (Server Connectivity Monitoring)</h2>
+<pre><code>#!/bin/bash
+servers=("google.com" "another-server.com")
+while true; do
+for server in "${servers[@]}"; do
+if ping -c 1 "$server" &> /dev/null; then
+echo "$server is reachable."
+else
+echo "$server is unreachable."
+fi
+done
+sleep 30
+done
+</code></pre>
+
 
 </body>
 </html>
