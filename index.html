@@ -1,52 +1,352 @@
-<! letter 'A' or 'a'."
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Protected Programs</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f5f5f5;
+      padding: 20px;
+      color: #333;
+      margin: 0;
+    }
+    h1 {
+      color: #007bff;
+      margin-bottom: 0.5em;
+    }
+    h2 {
+      margin-top: 2em;
+      color: #004085;
+    }
+    .code-block {
+      background-color: #272822;
+      color: #f8f8f2;
+      padding: 1em;
+      border-radius: 10px;
+      margin-top: 0.5em;
+      position: relative;
+      font-family: monospace;
+      white-space: pre-wrap;
+      overflow-x: auto;
+      max-height: 120px; /* compact */
+      box-shadow: 0 0 8px rgba(0,0,0,0.3);
+    }
+    pre {
+      margin: 0;
+    }
+    button.copy-btn {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      background-color: #007bff;
+      color: white;
+      border: none;
+      padding: 5px 10px;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 0.85em;
+      user-select: none;
+    }
+    button.copy-btn:hover {
+      background-color: #0056b3;
+    }
+    #content {
+      display: none;
+    }
+    #passwordPrompt {
+      text-align: center;
+      margin-top: 20%;
+    }
+    #passwordPrompt input {
+      padding: 10px;
+      font-size: 16px;
+    }
+    #passwordPrompt button {
+      display: none; /* hidden */
+    }
+  </style>
+</head>
+<body>
+  <div id="passwordPrompt">
+    <h2>Enter Password to View Content</h2>
+    <input type="password" id="passwordInput" placeholder="Enter password" onkeydown="handleEnter(event)" />
+    <button onclick="checkPassword()">Submit</button>
+  </div>
+
+  <div id="content">
+    <h1>Shell Script & C System Call Programs</h1>
+
+    <h2>1. List Files with All Permissions (r/w/x)</h2>
+    <div class="code-block" id="code1">
+      <pre><code>echo "The Files in the current dir are : "
+echo "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
+ls -l
+echo " Files having all permission[r/w/x]"
+echo "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
+for file in *
+do
+  if [ -f $file ]
+  then
+    if [ -r $file -a -w $file -a -x $file ]
+    then
+      ls -l $file
+    fi
+  fi
+done</code></pre>
+      <button class="copy-btn" onclick="copyToClipboard('code1')">Copy</button>
+    </div>
+
+    <h2>2. Convert Files to Uppercase</h2>
+    <div class="code-block" id="code2">
+      <pre><code>echo
+echo "Enter the list of file names"
+read fn
+set $fn
+if [ $# -lt 1 ]
+then
+  echo "Program needs atleast 1 filename"
+  exit
 fi
-</code></pre>
-<h2>6. Bash Script Example (Iterations and File Operations)</h2>
-<pre><code>#!/bin/bash
-echo "Numbers from 1 to 5:"
-for i in {1..5}; do
-echo $i
-done
-count=1
-echo "Numbers from 1 to 5 using while loop:"
-while [ $count -le 5 ]; do
-echo $count
-((count++))
-done
-echo "Creating a file 'example.txt'..."
-echo "Hello, this is a sample file." > example.txt
-echo "Reading content from 'example.txt'..."
-cat example.txt
-echo "Appending more content to 'example.txt'..."
-echo "This is additional text." >> example.txt
-echo "Updated content of 'example.txt':"
-cat example.txt
-echo "Deleting 'example.txt'..."
-rm example.txt
-</code></pre>
-<h2>7. Bash Script Example (Memory Monitoring)</h2>
-<pre><code>#!/bin/bash
-while true; do
-memory_usage=$(free -m | awk 'NR==2{printf "%.2f%%\n", $3*100/$2}')
-echo "Memory Usage: $memory_usage"
-sleep 10
-done
-</code></pre>
-<h2>8. Bash Script Example (Server Connectivity Monitoring)</h2>
-<pre><code>#!/bin/bash
-servers=("google.com" "another-server.com")
-while true; do
-for server in "${servers[@]}"; do
-if ping -c 1 "$server" &> /dev/null; then
-echo "$server is reachable."
+for i in $@
+do
+  echo "After converting to uppercase file $i"
+  echo "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
+  tr 'a-z' 'A-Z' < $i
+done</code></pre>
+      <button class="copy-btn" onclick="copyToClipboard('code2')">Copy</button>
+    </div>
+
+    <h2>3. Grep Lines by Character Count and Spaces</h2>
+    <div class="code-block" id="code3">
+      <pre><code>echo "Enter a filename"
+read f
+echo "The content of the file is:"
+cat $f
+echo
+echo "The lines that has exactly 2 characters"
+echo "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
+grep "^.\{2\}$" $f
+echo "The lines that has more than 2 spaces"
+echo "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
+grep "[[:space:]]\{2,\}" $f</code></pre>
+      <button class="copy-btn" onclick="copyToClipboard('code3')">Copy</button>
+    </div>
+
+    <h2>4. Compare Two Files and Delete if Identical</h2>
+    <div class="code-block" id="code4">
+      <pre><code>echo "Enter the first file name"
+read file1
+echo "Enter the second filename"
+read file2
+if [ -e $file1 -a -e $file2 -a ! -d $file1 -a ! -d $file2 ]
+then
+  cmp -s -- $file1 $file2 && rm $file2
+  if [ ! -e $file2 ]
+  then
+    echo "The two file contents are same. So $file2 is deleted"
+  else
+    echo "The two file contents are not same and $file2 not deleted"
+  fi
 else
-echo "$server is unreachable."
-fi
-done
-sleep 30
-done
-</code></pre>
+  echo "Input should be a regular file"
+fi</code></pre>
+      <button class="copy-btn" onclick="copyToClipboard('code4')">Copy</button>
+    </div>
 
+    <h2>5. Count Lines Without Vowels</h2>
+    <div class="code-block" id="code5">
+      <pre><code>echo Enter file1
+read f1
+if [ -f $f1 ]
+then
+  echo "The number of lines in a file that doesnot contain vowels are:"
+  grep -v -i '[aeiou]' $f1 | wc -l
+else
+  echo " File doesnot exist"
+fi</code></pre>
+      <button class="copy-btn" onclick="copyToClipboard('code5')">Copy</button>
+    </div>
 
+    <h2>6. Count Characters, Words, and Lines in a File</h2>
+    <div class="code-block" id="code6">
+      <pre><code>echo Enter the filename:
+read file
+if [ -f $file ]
+then
+  c=`cat $file | wc -c`
+  c=`expr $c - 1`
+  w=`cat $file | wc -w`
+  l=`cat $file | wc -l`
+  echo Number of Characters are: $c
+  echo Number of words are: $w
+  echo Number of lines are: $l
+else
+  echo File does not exist
+fi</code></pre>
+      <button class="copy-btn" onclick="copyToClipboard('code6')">Copy</button>
+    </div>
+
+    <h2>7. Display User and Session Information</h2>
+    <div class="code-block" id="code7">
+      <pre><code>echo your username :$(echo $USER)
+echo current date and time : $(date)
+echo checking logged in user with who command : $(who)
+echo checking logged in user with w command : $(w)
+echo checking logged in user with id command : $(id -un)
+echo checking logged in user with user command : $(users)
+echo checking logged in user with finger command : $(finger)</code></pre>
+      <button class="copy-btn" onclick="copyToClipboard('code7')">Copy</button>
+    </div>
+
+    <h2>8. Merge Three Files into One Using File Descriptors</h2>
+    <div class="code-block" id="code8">
+      <pre><code>echo Enter File 1
+read f1
+echo Enter File 2
+read f2
+echo Enter File 3
+read f3
+exec 3>f4
+cat $f1 $f2 $f3 >&3
+echo The Merged file is :
+cat f4
+exec 3>&-</code></pre>
+      <button class="copy-btn" onclick="copyToClipboard('code8')">Copy</button>
+    </div>
+
+    <h2>9. Copy File Using System Calls in C</h2>
+    <div class="code-block" id="code9">
+      <pre><code>#include <unistd.h>
+#include <sys/types.h>
+#include <sys/stat.h>
+#include <fcntl.h>
+
+int main() {
+    int fd1, fd2, n;
+    char buff[25];
+    fd1 = open("F1.txt", O_RDONLY);
+    fd2 = open("F3.txt", O_WRONLY | O_CREAT, 0644);
+    while ((n = read(fd1, buff, 20)) != 0) {
+        write(fd2, buff, n);
+    }
+    return 0;
+}</code></pre>
+      <button class="copy-btn" onclick="copyToClipboard('code9')">Copy</button>
+    </div>
+
+    <h2>10. Read from STDIN and Write to STDOUT Using System Calls in C</h2>
+    <div class="code-block" id="code10">
+      <pre><code>#include <unistd.h>
+
+int main() {
+    int n;
+    char buff[20];
+    n = read(0, buff, 20);
+    write(1, buff, n);
+    return 0;
+}</code></pre>
+      <button class="copy-btn" onclick="copyToClipboard('code10')">Copy</button>
+    </div>
+
+    <h2>11. Fork Example - Basic</h2>
+    <div class="code-block" id="code11">
+      <pre><code>#include <unistd.h>
+#include <sys/types.h>
+#include <stdio.h>
+#include <sys/wait.h>
+
+int main() {
+    pid_t q;
+    printf("before fork\n");
+    q = fork();
+    if (q == 0) {
+        printf("I am child having id %d\n", getpid());
+        printf("My parents id is %d\n", getppid());
+    } else {
+        wait(NULL);
+        printf("My child's id is %d\n", q);
+        printf("My parents having id %d\n", getpid());
+    }
+}</code></pre>
+      <button class="copy-btn" onclick="copyToClipboard('code11')">Copy</button>
+    </div>
+
+    <h2>12. Fork Example with sleep()</h2>
+    <div class="code-block" id="code12">
+      <pre><code>#include <unistd.h>
+#include <sys/types.h>
+#include <stdio.h>
+#include <sys/wait.h>
+
+int main() {
+    pid_t q;
+    printf("before fork\n");
+    q = fork();
+    if (q == 0) {
+        printf("I am child having id %d\n", getpid());
+        printf("My parents id is %d\n", getppid());
+    } else {
+        sleep(3);
+        printf("My child's id is %d\n", q);
+        printf("My parents having id %d\n", getpid());
+    }
+}</code></pre>
+      <button class="copy-btn" onclick="copyToClipboard('code12')">Copy</button>
+    </div>
+
+    <h2>13. Final Fork Example with wait()</h2>
+    <div class="code-block" id="code13">
+      <pre><code>#include <unistd.h>
+#include <sys/types.h>
+#include <stdio.h>
+#include <sys/wait.h>
+
+int main() {
+    pid_t q;
+    printf("before fork\n");
+    q = fork();
+    if (q == 0) {
+        printf("I am child having id %d\n", getpid());
+        printf("My parents id is %d\n", getppid());
+    } else {
+        wait(NULL);
+        printf("My child's id is %d\n", q);
+        printf("My parents having id %d\n", getpid());
+    }
+}</code></pre>
+      <button class="copy-btn" onclick="copyToClipboard('code13')">Copy</button>
+    </div>
+  </div>
+
+  <script>
+    function checkPassword() {
+      const password = document.getElementById("passwordInput").value;
+      if (password === "123") {
+        document.getElementById("passwordPrompt").style.display = "none";
+        document.getElementById("content").style.display = "block";
+      } else {
+        alert("Incorrect password!");
+      }
+    }
+
+    function handleEnter(event) {
+      if (event.key === "Enter") {
+        checkPassword();
+      }
+    }
+
+    function copyToClipboard(id) {
+      const codeElement = document.querySelector(`#${id} code`);
+      if (!codeElement) return;
+      const code = codeElement.innerText;
+      navigator.clipboard.writeText(code).then(() => {
+        alert("Code copied to clipboard!");
+      }).catch(() => {
+        alert("Failed to copy code.");
+      });
+    }
+  </script>
 </body>
 </html>
