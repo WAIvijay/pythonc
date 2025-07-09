@@ -1,539 +1,218 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Java Code Sharing Platform</title>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      margin: 0;
-      padding: 0;
-      background-color: #f4f4f9;
-      display: none;
-    }
-    header {
-      background-color: #333;
-      color: white;
-      padding: 10px 0;
-      text-align: center;
-    }
-    .container {
-      width: 90%;
-      margin: 20px auto;
-    }
-    .code-section, .code-block {
-      background-color: #fff;
-      padding: 15px;
-      border-radius: 5px;
-      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-      margin-bottom: 30px;
-    }
-    pre {
-      background-color: #f4f4f4;
-      padding: 10px;
-      border-radius: 5px;
-      font-size: 1.05em;
-      overflow-x: auto;
-    }
-    .nav-menu {
-      margin: 15px 0;
-      text-align: center;
-      flex-wrap: wrap;
-    }
-    .nav-menu a {
-      margin: 0 10px;
-      color: #333;
-      text-decoration: none;
-      font-weight: bold;
-    }
-    .nav-menu a:hover {
-      color: #007bff;
-    }
-    .copy-btn {
-      float: right;
-      margin-bottom: 5px;
-      padding: 5px 10px;
-      background-color: #007bff;
-      border: none;
-      color: white;
-      border-radius: 3px;
-      cursor: pointer;
-    }
-  </style>
+    <meta charset="UTF-8">
+    <title>C Programming Examples</title>
+    <style>
+        body {
+            background-color: #1e1e1e;
+            color: #ffffff;
+            font-family: Consolas, monospace;
+            padding: 20px;
+        }
+        h1, h2 {
+            color: #00ffc8;
+        }
+        pre {
+            background-color: #2d2d2d;
+            padding: 15px;
+            border-radius: 10px;
+            overflow-x: auto;
+            border: 1px solid #444;
+            box-shadow: 0 0 10px #00ffc84d;
+        }
+        code {
+            color: #ffffff;
+        }
+    </style>
 </head>
-<body onload="askPassword()">
-<header>
-  <h3>Java Code Snippets Platform</h3>
-</header>
+<body>
 
-<div class="container">
-  <div class="nav-menu">
-    <a href="#reverse-string">Reverse String</a>
-    <a href="#throw-example">Throw Example</a>
-    <a href="#unchecked">Unchecked Exception</a>
-    <a href="#abstract-class">Abstract Class</a>
-    <a href="#interface-example">Interfaces</a>
-    <a href="#inheritance">Inheritance</a>
-    <a href="#file-copy">File Copy</a>
-    <a href="#array-addition">Array Addition</a>
-    <a href="#variables">Variables</a>
-    <a href="#employee-add">Employee Add</a>
-    <a href="#employee-constructor">Constructor</a>
-    <a href="#employee-copy">Copy Constructor</a>
-    <a href="#odd-even">Odd Even</a>
-    <a href="#vowel-check">Vowel Check</a>
-    <a href="#pyramid">Pyramid</a>
-    <a href="#positive-negative">Positive/Negative</a>
-    <a href="#for-loop">For Loop Sum</a>
-    <a href="#palindrome">Palindrome</a>
-    <a href="#shoes-class">Shoes Class</a>
-    <a href="#flipkart">Flipkart</a>
-  </div>
+    <h1>C Programming Examples</h1>
 
-  <!-- BEGIN CODE SECTIONS -->
-  <div id="reverse-string" class="code-block">
-    <h5>Reverse String</h5>
-    <pre><code>public class ReverseString {
-    public static void main(String[] args) {
-        String s = "hello";
-        String rev = "";
-        for (int i = s.length() - 1; i >= 0; i--) {
-            rev += s.charAt(i);
-        }
-        System.out.println("Reversed string: " + rev);
-    }
-}</code></pre>
-  </div>
+    <h2>1. Fork Example</h2>
+    <pre><code>#include &lt;stdio.h&gt;
+#include &lt;sys/types.h&gt;
+#include &lt;unistd.h&gt;
 
-  <div id="throw-example" class="code-block">
-    <h5>Throw Example</h5>
-    <pre><code>class ThrowExample {
-    void myMethod(int num) throws IOException, ClassNotFoundException {
-        if (num == 1) {
-            throw new IOException("IO Exception occurred");
-        } else {
-            throw new ClassNotFoundException("Class not Found Exception");
-        }
+int main()
+{
+    fork();
+    printf("Using fork() system call\n");
+    return 0;
+}
+</code></pre>
+
+    <h2>2. Exec Example</h2>
+    <pre><code>#include &lt;stdio.h&gt;
+#include &lt;string.h&gt;
+#include &lt;stdlib.h&gt;
+#include &lt;unistd.h&gt;
+#include &lt;errno.h&gt;
+
+int main()
+{
+    printf("I am the parent process\n");
+
+    char *arg_Ptr[4];
+    arg_Ptr[0] = "child.c";
+    arg_Ptr[1] = " Hello from ";
+    arg_Ptr[2] = " process 2 ";
+    arg_Ptr[3] = NULL;
+
+    execv("/home/linuxhint/Documents/child.bin", arg_Ptr);
+
+    return 0;
+}
+</code></pre>
+
+    <h2>3. Thread Example 1</h2>
+    <pre><code>#include &lt;pthread.h&gt;
+#include &lt;stdio.h&gt;
+
+/* Thread function definition */
+void* threadFunction(void* args)
+{
+    while(1)
+    {
+        printf("I am thread function.\n");
     }
 }
 
-public class example {
-    public static void main(String args[]) {
-        try {
-            ThrowExample obj = new ThrowExample();
-            obj.myMethod(1);
-        } catch (Exception ex) {
-            System.out.println("Exception caught: " + ex);
-        }
+int main()
+{
+    /* Creating thread id */
+    pthread_t id;
+    int ret;
+
+    /* Creating thread */
+    ret = pthread_create(&id, NULL, &threadFunction, NULL);
+
+    if(ret == 0){
+        printf("Thread created successfully.\n");
     }
-}</code></pre>
-  </div>
-
-  <div id="unchecked" class="code-block">
-    <h5>Unchecked Exception</h5>
-    <pre><code>public class unchecked {
-    public static void main(String[] args) {
-        int num = 35;
-        int zero = 0;
-
-        try {
-            int result = num / zero;
-            System.out.println(result);
-        } catch (ArithmeticException e) {
-            System.out.println("Error: Cannot divide by zero!");
-        }
+    else{
+        printf("Thread not created.\n");
+        return 0; /* return from main */
     }
-}</code></pre>
-  </div>
 
-  <div id="abstract-class" class="code-block">
-    <h5>Abstract Class</h5>
-    <pre><code>abstract class Abs {
-    abstract void display();
+    while(1)
+    {
+        printf("I am main function.\n");
+    }
+
+    return 0;
+}
+</code></pre>
+
+    <h2>4. Thread Example 2 with Mutex</h2>
+    <pre><code>#include &lt;stdio.h&gt;
+#include &lt;pthread.h&gt;
+
+#define NTHREADS 10
+void *thread_function(void *);
+pthread_mutex_t mutex1 = PTHREAD_MUTEX_INITIALIZER;
+int counter = 0;
+
+int main()
+{
+    pthread_t thread_id[NTHREADS];
+    int i, j;
+
+    for(i = 0; i &lt; NTHREADS; i++)
+    {
+        pthread_create(&thread_id[i], NULL, thread_function, NULL);
+    }
+
+    for(j = 0; j &lt; NTHREADS; j++)
+    {
+        pthread_join(thread_id[j], NULL);
+    }
+
+    printf("Final counter value: %d\n", counter);
+    return 0;
 }
 
-abstract class B extends Abs {
-    void display() {
-        System.out.println("Abstract method in Abs");
-    }
-    abstract void show();
+void *thread_function(void *dummyPtr)
+{
+    printf("Thread number %ld\n", pthread_self());
+
+    pthread_mutex_lock(&mutex1);
+    counter++;
+    pthread_mutex_unlock(&mutex1);
+
+    return NULL;
 }
+</code></pre>
+<h2>5. Bash Script Example</h2>
+<pre><code>#!/bin/bash
+echo "Please enter your name: "
+read name
+if [ -z "$name" ]; then
+    echo "You didn't enter anything."
+    exit 1
+fi
+if [[ ! "$name" =~ ^[a-zA-Z]+$ ]]; then
+    echo "Invalid name. Please enter only alphabetic characters."
+    exit 1
+fi
+uppercase_name=$(echo "$name" | tr '[:lower:]' '[:upper:]')
 
-class C extends B {
-    void show() {
-        System.out.println("show method in C");
-    }
-}
-
-class Abstract {
-    public static void main(String args[]) {
-        C obj = new C();
-        obj.display();
-        obj.show();
-    }
-}</code></pre>
-  </div>
-
-  <div id="interface-example" class="code-block">
-    <h5>Interfaces</h5>
-    <pre><code>interface k {
-    void adisplay();
-    void ashow();
-}
-
-interface l {
-    void bdisplay();
-    void bshow();
-}
-
-class ab implements k, l {
-    public void adisplay() {
-        System.out.println("a display");
-    }
-    public void ashow() {
-        System.out.println("a show");
-    }
-    public void bdisplay() {
-        System.out.println("b display");
-    }
-    public void bshow() {
-        System.out.println("b show");
-    }
-}
-
-public class abstraction {
-    public static void main(String args[]) {
-        ab obj = new ab();
-        obj.adisplay();
-        obj.ashow();
-        obj.bdisplay();
-        obj.bshow();
-    }
-}</code></pre>
-  </div>
-
-  <div id="inheritance" class="code-block">
-    <h5>Inheritance</h5>
-    <pre><code>public class base {
-    int a = 10;
-    void display() {
-        System.out.println("grand parent");
-    }
-}
-
-class derived1 extends base {
-    int b = 20;
-    void show() {
-        System.out.println("parent/derived1");
-    }
-}
-
-class derived2 extends derived1 {
-    int res;
-    int c = 80, d = 90;
-    void add() {
-        res = c + d;
-        System.out.println("child/derived2");
-    }
-}
-
-class bases {
-    public static void main(String[] args) {
-        derived2 obj = new derived2();
-        System.out.println("grand parent a=" + obj.a);
-        obj.display();
-        System.out.println("derived1 b=" + obj.b);
-        obj.show();
-        System.out.println("derived2 result=" + obj.res);
-        obj.add();
-    }
-}</code></pre>
-  </div>
-
-  <div id="file-copy" class="code-block">
-    <h5>File Copy</h5>
-    <pre><code>import java.io.*;
-public class run {
-    public static void main(String[] args) {
-        File inF = new File("C:\\Users\\vijay\\Desktop\\j1.txt");
-        File outF = new File("C:\\Users\\vijay\\Desktop\\j2.txt");
-        FileReader inS = null;
-        FileWriter outS = null;
-        try {
-            inS = new FileReader(inF);
-            outS = new FileWriter(outF);
-            int ch;
-            while ((ch = inS.read()) != -1) {
-                outS.write(ch);
-            }
-        } catch (Exception e) {
-            System.out.println(e);
-            System.exit(-1);
-        } finally {
-            try {
-                System.out.println("files is written successfully");
-                inS.close();
-                outS.close();
-            } catch (Exception e) {}
-        }
-    }
-}</code></pre>
-  </div>
-
-  <div id="array-addition" class="code-block">
-  <h5>Array Addition</h5>
-  <pre><code>public class ArrayAdd {
-    public static void main(String[] args) {
-        int[] a = {1, 2, 3};
-        int[] b = {4, 5, 6};
-        int[] sum = new int[a.length];
-
-        for (int i = 0; i &lt; a.length; i++) {
-            sum[i] = a[i] + b[i];
-            System.out.println("Sum[" + i + "] = " + sum[i]);
-        }
-    }
-}</code></pre>
-</div>
-
-<div id="variables" class="code-block">
-  <h5>Variables</h5>
-  <pre><code>public class Variables {
-    public static void main(String[] args) {
-        int a = 10;
-        float b = 5.5f;
-        char c = 'A';
-        String name = "Vijay";
-
-        System.out.println("Int: " + a);
-        System.out.println("Float: " + b);
-        System.out.println("Char: " + c);
-        System.out.println("String: " + name);
-    }
-}</code></pre>
-</div>
+echo "Original Name: $name"
+echo "Uppercase Name: $uppercase_name"
+if [[ "$name" == [Aa]* ]]; then
+    echo "Your name starts with the letter 'A' or 'a'."
+else
+    echo "Your name does not start with the letter 'A' or 'a'."
+<! letter 'A' or 'a'."
+fi
+</code></pre>
+<h2>6. Bash Script Example (Iterations and File Operations)</h2>
+<pre><code>#!/bin/bash
+echo "Numbers from 1 to 5:"
+for i in {1..5}; do
+echo $i
+done
+count=1
+echo "Numbers from 1 to 5 using while loop:"
+while [ $count -le 5 ]; do
+echo $count
+((count++))
+done
+echo "Creating a file 'example.txt'..."
+echo "Hello, this is a sample file." > example.txt
+echo "Reading content from 'example.txt'..."
+cat example.txt
+echo "Appending more content to 'example.txt'..."
+echo "This is additional text." >> example.txt
+echo "Updated content of 'example.txt':"
+cat example.txt
+echo "Deleting 'example.txt'..."
+rm example.txt
+</code></pre>
+<h2>7. Bash Script Example (Memory Monitoring)</h2>
+<pre><code>#!/bin/bash
+while true; do
+memory_usage=$(free -m | awk 'NR==2{printf "%.2f%%\n", $3*100/$2}')
+echo "Memory Usage: $memory_usage"
+sleep 10
+done
+</code></pre>
+<h2>8. Bash Script Example (Server Connectivity Monitoring)</h2>
+<pre><code>#!/bin/bash
+servers=("google.com" "another-server.com")
+while true; do
+for server in "${servers[@]}"; do
+if ping -c 1 "$server" &> /dev/null; then
+echo "$server is reachable."
+else
+echo "$server is unreachable."
+fi
+done
+sleep 30
+done
+</code></pre>
 
 
-<div id="employee-add" class="code-block">
-  <h5>Employee Add</h5>
-  <pre><code>class Employee {
-    int id;
-    String name;
-    void insert(int i, String n) {
-        id = i;
-        name = n;
-    }
-    void display() {
-        System.out.println(id + " " + name);
-    }
-}
-
-public class TestEmployee {
-    public static void main(String[] args) {
-        Employee e1 = new Employee();
-        e1.insert(101, "Vijay");
-        e1.display();
-    }
-}</code></pre>
-</div>
-
-<div id="employee-constructor" class="code-block">
-  <h5>Constructor</h5>
-  <pre><code>class Employee {
-    int id;
-    String name;
-
-    Employee(int i, String n) {
-        id = i;
-        name = n;
-    }
-
-    void display() {
-        System.out.println(id + " " + name);
-    }
-
-    public static void main(String args[]) {
-        Employee e1 = new Employee(111, "Vijay");
-        e1.display();
-    }
-}</code></pre>
-</div>
-
-<div id="employee-copy" class="code-block">
-  <h5>Copy Constructor</h5>
-  <pre><code>class Employee {
-    int id;
-    String name;
-
-    Employee(int i, String n) {
-        id = i;
-        name = n;
-    }
-
-    Employee(Employee e) {
-        id = e.id;
-        name = e.name;
-    }
-
-    void display() {
-        System.out.println(id + " " + name);
-    }
-
-    public static void main(String args[]) {
-        Employee e1 = new Employee(101, "Vijay");
-        Employee e2 = new Employee(e1);
-        e1.display();
-        e2.display();
-    }
-}</code></pre>
-</div>
-
-<div id="odd-even" class="code-block">
-  <h5>Odd Even</h5>
-  <pre><code>public class OddEven {
-    public static void main(String[] args) {
-        int num = 4;
-        if (num % 2 == 0)
-            System.out.println(num + " is Even");
-        else
-            System.out.println(num + " is Odd");
-    }
-}</code></pre>
-</div>
-
-<div id="vowel-check" class="code-block">
-  <h5>Vowel Check</h5>
-  <pre><code>public class VowelCheck {
-    public static void main(String[] args) {
-        char ch = 'e';
-        if (ch == 'a' || ch == 'e' || ch == 'i' || ch == 'o' || ch == 'u')
-            System.out.println(ch + " is a vowel");
-        else
-            System.out.println(ch + " is a consonant");
-    }
-}</code></pre>
-</div>
-
-<div id="pyramid" class="code-block">
-  <h5>Pyramid</h5>
-  <pre><code>public class Pyramid {
-    public static void main(String[] args) {
-        int rows = 5;
-        for (int i = 1; i <= rows; ++i) {
-            for (int j = 1; j <= i; ++j) {
-                System.out.print("* ");
-            }
-            System.out.println();
-        }
-    }
-}</code></pre>
-</div>
-
-<div id="positive-negative" class="code-block">
-  <h5>Positive/Negative</h5>
-  <pre><code>public class PosNeg {
-    public static void main(String[] args) {
-        int num = -5;
-        if (num > 0)
-            System.out.println("Positive number");
-        else if (num < 0)
-            System.out.println("Negative number");
-        else
-            System.out.println("Zero");
-    }
-}</code></pre>
-</div>
-
-<div id="for-loop" class="code-block">
-  <h5>For Loop Sum</h5>
-  <pre><code>public class LoopSum {
-    public static void main(String[] args) {
-        int sum = 0;
-        for (int i = 1; i <= 10; i++) {
-            sum += i;
-        }
-        System.out.println("Sum = " + sum);
-    }
-}</code></pre>
-</div>
-
-<div id="palindrome" class="code-block">
-  <h5>Palindrome</h5>
-  <pre><code>public class Palindrome {
-    public static void main(String[] args) {
-        int num = 121, rev = 0, temp, remainder;
-        temp = num;
-
-        while (num != 0) {
-            remainder = num % 10;
-            rev = rev * 10 + remainder;
-            num /= 10;
-        }
-
-        if (temp == rev)
-            System.out.println(temp + " is a Palindrome.");
-        else
-            System.out.println(temp + " is not a Palindrome.");
-    }
-}</code></pre>
-</div>
-
-<div id="shoes-class" class="code-block">
-  <h5>Shoes Class</h5>
-  <pre><code>class Shoes {
-    String brand;
-    int size;
-
-    void insert(String b, int s) {
-        brand = b;
-        size = s;
-    }
-
-    void display() {
-        System.out.println("Brand: " + brand + ", Size: " + size);
-    }
-
-    public static void main(String args[]) {
-        Shoes s1 = new Shoes();
-        s1.insert("Nike", 9);
-        s1.display();
-    }
-}</code></pre>
-</div>
-
-<div id="flipkart" class="code-block">
-  <h5>Flipkart Class Example</h5>
-  <pre><code>class Product {
-    String name;
-    double price;
-
-    Product(String n, double p) {
-        name = n;
-        price = p;
-    }
-
-    void display() {
-        System.out.println("Product: " + name + ", Price: ₹" + price);
-    }
-
-    public static void main(String args[]) {
-        Product p1 = new Product("Shoes", 1999.99);
-        p1.display();
-    }
-}</code></pre>
-</div>
-
-<script>
-  function askPassword() {
-    var password = prompt("Enter password to access the platform:");
-    if (password === "admin") {
-      document.body.style.display = "block";
-    } else {
-      alert("Incorrect password. Access denied!");
-      window.location.href = "about:blank";
-    }
-  }
-</script>
 </body>
 </html>
