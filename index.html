@@ -2,217 +2,59 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>C Programming Examples</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mr Robot</title>
     <style>
         body {
-            background-color: #1e1e1e;
-            color: #ffffff;
-            font-family: Consolas, monospace;
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background-color: #f0f0f0;
+            margin: 0;
+            padding: 0;
+            transition: background-color 0.5s; /* Transition for smooth color change */
+        }
+        #banner {
+            background-color: #333;
+            color: white;
             padding: 20px;
         }
-        h1, h2 {
-            color: #00ffc8;
+        #name-input {
+            margin-top: 20px;
+            font-size: 18px;
+            padding: 10px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
         }
-        pre {
-            background-color: #2d2d2d;
-            padding: 15px;
-            border-radius: 10px;
-            overflow-x: auto;
-            border: 1px solid #444;
-            box-shadow: 0 0 10px #00ffc84d;
-        }
-        code {
-            color: #ffffff;
+        #output {
+            margin-top: 20px;
+            font-size: 24px;
+            font-weight: bold;
         }
     </style>
 </head>
 <body>
+    <div id="banner">
+        <h1>Mr Robot</h1>
+    </div>
+    <div>
+        <form id="name-form">
+            <label for="name">Enter your name:</label><br>
+            <input type="text" id="name" name="name" required><br><br>
+            <input type="submit" value="Submit">
+        </form>
+    </div>
+    <div id="output"></div>
 
-    <h1>C Programming Examples</h1>
+    <script>
+        document.getElementById('name-form').addEventListener('submit', function(event) {
+            event.preventDefault();
+            var name = document.getElementById('name').value;
+            var output = document.getElementById('output');
+            output.innerHTML = 'Fuck You ' + name + '!';
 
-    <h2>1. Fork Example</h2>
-    <pre><code>#include &lt;stdio.h&gt;
-#include &lt;sys/types.h&gt;
-#include &lt;unistd.h&gt;
-
-int main()
-{
-    fork();
-    printf("Using fork() system call\n");
-    return 0;
-}
-</code></pre>
-
-    <h2>2. Exec Example</h2>
-    <pre><code>#include &lt;stdio.h&gt;
-#include &lt;string.h&gt;
-#include &lt;stdlib.h&gt;
-#include &lt;unistd.h&gt;
-#include &lt;errno.h&gt;
-
-int main()
-{
-    printf("I am the parent process\n");
-
-    char *arg_Ptr[4];
-    arg_Ptr[0] = "child.c";
-    arg_Ptr[1] = " Hello from ";
-    arg_Ptr[2] = " process 2 ";
-    arg_Ptr[3] = NULL;
-
-    execv("/home/linuxhint/Documents/child.bin", arg_Ptr);
-
-    return 0;
-}
-</code></pre>
-
-    <h2>3. Thread Example 1</h2>
-    <pre><code>#include &lt;pthread.h&gt;
-#include &lt;stdio.h&gt;
-
-/* Thread function definition */
-void* threadFunction(void* args)
-{
-    while(1)
-    {
-        printf("I am thread function.\n");
-    }
-}
-
-int main()
-{
-    /* Creating thread id */
-    pthread_t id;
-    int ret;
-
-    /* Creating thread */
-    ret = pthread_create(&id, NULL, &threadFunction, NULL);
-
-    if(ret == 0){
-        printf("Thread created successfully.\n");
-    }
-    else{
-        printf("Thread not created.\n");
-        return 0; /* return from main */
-    }
-
-    while(1)
-    {
-        printf("I am main function.\n");
-    }
-
-    return 0;
-}
-</code></pre>
-
-    <h2>4. Thread Example 2 with Mutex</h2>
-    <pre><code>#include &lt;stdio.h&gt;
-#include &lt;pthread.h&gt;
-
-#define NTHREADS 10
-void *thread_function(void *);
-pthread_mutex_t mutex1 = PTHREAD_MUTEX_INITIALIZER;
-int counter = 0;
-
-int main()
-{
-    pthread_t thread_id[NTHREADS];
-    int i, j;
-
-    for(i = 0; i &lt; NTHREADS; i++)
-    {
-        pthread_create(&thread_id[i], NULL, thread_function, NULL);
-    }
-
-    for(j = 0; j &lt; NTHREADS; j++)
-    {
-        pthread_join(thread_id[j], NULL);
-    }
-
-    printf("Final counter value: %d\n", counter);
-    return 0;
-}
-
-void *thread_function(void *dummyPtr)
-{
-    printf("Thread number %ld\n", pthread_self());
-
-    pthread_mutex_lock(&mutex1);
-    counter++;
-    pthread_mutex_unlock(&mutex1);
-
-    return NULL;
-}
-</code></pre>
-<h2>5. Bash Script Example</h2>
-<pre><code>#!/bin/bash
-echo "Please enter your name: "
-read name
-if [ -z "$name" ]; then
-    echo "You didn't enter anything."
-    exit 1
-fi
-if [[ ! "$name" =~ ^[a-zA-Z]+$ ]]; then
-    echo "Invalid name. Please enter only alphabetic characters."
-    exit 1
-fi
-uppercase_name=$(echo "$name" | tr '[:lower:]' '[:upper:]')
-
-echo "Original Name: $name"
-echo "Uppercase Name: $uppercase_name"
-if [[ "$name" == [Aa]* ]]; then
-    echo "Your name starts with the letter 'A' or 'a'."
-else
-    echo "Your name does not start with the letter 'A' or 'a'."
-<! letter 'A' or 'a'."
-fi
-</code></pre>
-<h2>6. Bash Script Example (Iterations and File Operations)</h2>
-<pre><code>#!/bin/bash
-echo "Numbers from 1 to 5:"
-for i in {1..5}; do
-echo $i
-done
-count=1
-echo "Numbers from 1 to 5 using while loop:"
-while [ $count -le 5 ]; do
-echo $count
-((count++))
-done
-echo "Creating a file 'example.txt'..."
-echo "Hello, this is a sample file." > example.txt
-echo "Reading content from 'example.txt'..."
-cat example.txt
-echo "Appending more content to 'example.txt'..."
-echo "This is additional text." >> example.txt
-echo "Updated content of 'example.txt':"
-cat example.txt
-echo "Deleting 'example.txt'..."
-rm example.txt
-</code></pre>
-<h2>7. Bash Script Example (Memory Monitoring)</h2>
-<pre><code>#!/bin/bash
-while true; do
-memory_usage=$(free -m | awk 'NR==2{printf "%.2f%%\n", $3*100/$2}')
-echo "Memory Usage: $memory_usage"
-sleep 10
-done
-</code></pre>
-<h2>8. Bash Script Example (Server Connectivity Monitoring)</h2>
-<pre><code>#!/bin/bash
-servers=("google.com" "another-server.com")
-while true; do
-for server in "${servers[@]}"; do
-if ping -c 1 "$server" &> /dev/null; then
-echo "$server is reachable."
-else
-echo "$server is unreachable."
-fi
-done
-sleep 30
-done
-</code></pre>
-
-
+            // Background color change
+            document.body.style.backgroundColor = '#ffcccc'; // Change to desired color
+        });
+    </script>
 </body>
 </html>
